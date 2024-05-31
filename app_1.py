@@ -16,6 +16,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     tables_name = base.classes.keys()
+
+    session.close()
     return tables_name
 
 @app.route('/column_names')
@@ -32,6 +34,8 @@ def col_names():
         col_names = [col['name'] for col in column_names]
 
         tabels_info[table_name] = col_names
+
+        session.close()
 
     return jsonify(tabels_info)
 
